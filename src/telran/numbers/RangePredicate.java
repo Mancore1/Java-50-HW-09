@@ -27,16 +27,16 @@ public class RangePredicate implements Iterable<Integer> {
 
 	public int[] toArray() {
 		int length = 0;
-		for (int i = minInclusive; i < maxExclusive; i++) {
-			if (predicate == null || predicate.test(i)) {
+		for (int num: this) {
+			if (predicate == null || predicate.test(num)) {
 				length++;
 			}
 		}
 		int[] res = new int[length];
 		int index = 0;
-		for (int i = minInclusive; i < maxExclusive; i++) {
-			if (predicate == null || predicate.test(i)) {
-				res[index] = i;
+		for (int num: this) {
+			if (predicate == null || predicate.test(num)) {
+				res[index] = num;
 				index++;
 			}
 		}
@@ -44,7 +44,7 @@ public class RangePredicate implements Iterable<Integer> {
 	}
 
 	private class RangePredicateIterator implements Iterator<Integer> {
-		int current;
+		int current = minInclusive;
 		Predicate<Integer> innerPredicate;
 
 		RangePredicateIterator(Predicate<Integer> predicate) {
